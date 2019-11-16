@@ -1,0 +1,25 @@
+<h1> Buildings </h1>
+<% if flash[:error].present? || flash[:success].present? %>
+<h3> <%= flash[:error] || flash[:success] %> </h3>
+<% end %>
+<ul>
+<% @buildings.each do |building| %>
+    <li> <%= building.name %> </li>
+    <li> <%= building.description %> </li>
+<% end %>
+</ul>
+
+
+<%= form_with model: @building, :url => {:controller => :buildings, :action => :create}, method: :post do |f| %>
+  <div class="row">
+    <%= f.text_field :name, placeholder: "Building Name", class: "centered" %>
+  </div>
+
+  <div class="row">
+    <%= f.text_area :description, placeholder: "Description of the buildings", class: "centered" %>
+  </div>
+
+  <div class="row">
+    <%= f.submit "Add", class: "centered" %>
+  </div>
+<% end %>
